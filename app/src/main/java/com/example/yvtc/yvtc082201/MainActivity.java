@@ -1,5 +1,6 @@
 package com.example.yvtc.yvtc082201;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -54,5 +55,15 @@ public class MainActivity extends AppCompatActivity {
         os.flush();
         os.close();
         is.close();
+    }
+
+    public void clickAdd(View v)
+    {
+        SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(dbFile, null);
+        ContentValues cv = new ContentValues();
+        cv.put("name", "CCC");
+        cv.put("tel", "3344");
+        db.insert("phone", null, cv);
+        db.close();
     }
 }
