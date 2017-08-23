@@ -35,7 +35,9 @@ public class MainActivity extends AppCompatActivity {
     public void clickRead(View v)
     {
         SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(dbFile, null);
-        Cursor c = db.rawQuery("Select * from phone", null);
+        // Cursor c = db.rawQuery("Select * from phone", null);
+        Cursor c = db.query("phone", new String[] {"id", "name", "tel"}, null, null , null, null, "id desc");
+
         while (c.moveToNext())
         {
             Log.d("DB", c.getString(1) + "," + c.getString(2));
@@ -64,6 +66,21 @@ public class MainActivity extends AppCompatActivity {
         cv.put("name", "CCC");
         cv.put("tel", "3344");
         db.insert("phone", null, cv);
+        db.close();
+    }
+    public void clickUpdate(View v)
+    {
+        SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(dbFile, null);
+        ContentValues cv = new ContentValues();
+        cv.put("name", "CDCD");
+        cv.put("tel", "4343");
+        db.update("phone", cv, "id=?", new String[] {"3"});
+        db.close();
+    }
+    public void clickDelete(View v)
+    {
+        SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(dbFile, null);
+        db.delete("phone", "id=?", new String[] {"2"});
         db.close();
     }
 }
