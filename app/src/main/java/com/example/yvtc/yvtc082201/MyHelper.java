@@ -10,18 +10,21 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class MyHelper extends SQLiteOpenHelper {
     final static String DB_NAME = "mydata.sqlite";
-    final static int VERSION = 1;
+    final static int VERSION = 2;
     public MyHelper(Context context) {
         super(context, DB_NAME, null, VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE \"phone\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , \"name\" VARCHAR, \"tel\" VARCHAR)");
+        db.execSQL("CREATE TABLE \"phone\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , \"name\" VARCHAR, \"tel\" VARCHAR, \"email\" VARCHAR)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        if (oldVersion == 1 && newVersion == 2)
+        {
+            db.execSQL("ALTER TABLE \"main\".\"phone\" ADD COLUMN \"email\" VARCHAR");
+        }
     }
 }

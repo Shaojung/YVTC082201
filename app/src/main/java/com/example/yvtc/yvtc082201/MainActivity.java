@@ -29,11 +29,11 @@ public class MainActivity extends AppCompatActivity {
     {
         SQLiteDatabase db = helper.getWritableDatabase();
         // Cursor c = db.rawQuery("Select * from phone", null);
-        Cursor c = db.query("phone", new String[] {"id", "name", "tel"}, null, null , null, null, "id desc");
+        Cursor c = db.query("phone", new String[] {"id", "name", "tel", "email"}, null, null , null, null, "id desc");
 
         while (c.moveToNext())
         {
-            Log.d("DB", c.getString(1) + "," + c.getString(2));
+            Log.d("DB", c.getString(1) + "," + c.getString(2) + "," + c.getString(3));
         }
         c.close();
         db.close();
@@ -54,8 +54,9 @@ public class MainActivity extends AppCompatActivity {
     {
         SQLiteDatabase db = helper.getWritableDatabase();;
         ContentValues cv = new ContentValues();
-        cv.put("name", "CCC");
-        cv.put("tel", "3344");
+        cv.put("name", "DDD");
+        cv.put("tel", "5555");
+        cv.put("email", "ddd@abc.com");
         db.insert("phone", null, cv);
         db.close();
     }
